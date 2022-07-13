@@ -2,6 +2,7 @@
 """
 Contains functions for creating keyboards
 """
+
 from config import (
 	UserMood, 
 	Genre, 
@@ -59,4 +60,36 @@ class KeyboardHandler():
 					InlineKeyboardButton(text=CustomInlineKeyboardButton.LOVE_BTN.value, callback_data=UserMood.LOVE.value)
 				]
 			]	
+		)
+
+	def get_show_inlinekeyboard():
+		"""Sets up inlinekeyboard for user's show selection"""
+		return InlineKeyboardMarkup(
+			inline_keyboard=[
+				[
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.MOVIE_BTN.value, callback_data=Show.MOVIE.value),
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.SERIES_BTN.value, callback_data=Show.SERIES.value)
+				]
+			]
+		)
+
+	def get_genre_inlinekeyboard():
+		"""Sets up inlinekeyboard for user's genre selection"""
+		return InlineKeyboardMarkup(
+			inline_keyboard=[
+				[
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.COMEDY_BTN.value, callback_data=Genre.COMEDY.value),
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.THRILLER_BTN.value, callback_data=Genre.THRILLER.value),
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.ACTION_BTN.value, callback_data=Genre.ACTION.value)
+				],
+				[
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.DOCUMENTARY_BTN.value, callback_data=Genre.DOCUMENTARY.value),
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.FAMILY_BTN.value, callback_data=Genre.FAMILY.value),
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.SPORT_BTN.value, callback_data=Genre.SPORT.value)
+				],
+				[
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.FANTASY_BTN.value, callback_data=Genre.FANTASY.value),
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.ANIMATION_BTN.value, callback_data=Genre.ANIMATION.value)
+				]
+			]
 		)

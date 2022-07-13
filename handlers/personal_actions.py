@@ -22,5 +22,8 @@ async def send_welcome(message: types.Message):
 # filter user messages
 @dp.message_handler()
 async def filter_messages(message: types.Message):
+	"""Process ReplyKeyboard calls"""
+
+	# 'smart selection' case
 	if message.text == CustomReplyKeyboardButton.SMART_SELECTION_BTN.value:
 		await message.answer("Great, let me know your spirit condition", reply_markup=KeyboardHandler.get_mood_inlinekeyboard())
