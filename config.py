@@ -11,14 +11,21 @@ from enum import Enum
 load_dotenv()
 TOKEN = os.getenv('BOT_TOKEN')
 
+
 # user's selected mood, show type(movie/series) and genre
 # the variables are set in 'callbacks.py' and never changed
 USER_MOOD = None
 USER_SHOW = None
 USER_GENRE = None
 
+
 # used in 'callbacks.py' for verification
-PROCESS_FLAGS = {'mood_selected': False, 'show_selected': False, 'genre_selected': False}
+PROCESS_FLAGS = {
+	'mood_selected': False, 
+	'show_selected': False, 
+	'genre_selected': False
+}
+
 
 class UserMood(Enum):
 	"""
@@ -43,6 +50,7 @@ class UserMood(Enum):
 		"""Get a list of values"""
 		return list(map(lambda c: c.value, cls))
 
+
 class Genre(Enum):
 	"""Available genres of movies/series which we have in DB"""
 	COMEDY = 'comedy'
@@ -59,6 +67,7 @@ class Genre(Enum):
 		"""Get a list of values"""
 		return list(map(lambda c: c.value, cls))
 
+
 class Show(Enum):
 	"""
 	What kind of show user wants to watch
@@ -74,6 +83,7 @@ class Show(Enum):
 		"""Get a list of values"""
 		return list(map(lambda c: c.value, cls))
 
+
 class Novelty(Enum):
 	"""
 	Films before 2010 included are considered as old (upper bound)
@@ -82,12 +92,14 @@ class Novelty(Enum):
 	OLD = 2010
 	MODERN = 2011
 
+
 class CustomReplyKeyboardButton(Enum):
 	"""Button texts for ReplyKeyboard"""
 	SMART_SELECTION_BTN = '🎬Smart Selection'
 	WE_RECOMMEND_BTN = '🎯We recommend'
 	NO_PREFERENCES_BTN = '👀No preferences'
 	SEND_FEEDBACK_BTN = '🎭Send feedback'
+
 
 class CustomInlineKeyboardButton(Enum):
 	"""Button texts for InlineKeyboard to process user's mood selection"""
@@ -115,3 +127,27 @@ class CustomInlineKeyboardButton(Enum):
 	SPORT_BTN = '🚴‍♀️Sport'
 	FANTASY_BTN = '🔮Fantasy'
 	ANIMATION_BTN = '🧸Animation'
+
+
+"""
+Sticker paths
+"""
+
+WELCOME_STI = 'static/welcome.webp'
+SMART_SELECTION_STI = 'static/smart_selection.webp'
+
+
+"""
+Dictionaries with several variants of replying messages
+only welcome message in 'personal_actions.py' is hard-coded due to getting bot/user names
+"""
+
+REPLY_KEYBOARD_MESSAGES = {
+	'SMART_SELECTION': ["It's movie time! 3.. 2.. 1..", "Time to eat some popcorn then..."]
+}
+
+CALLBACK_MESSAGES = {
+	'MOOD_SELECTION': ['Great, let me know your spirit condition', 'Share your mood with me'],
+	'SHOW_PROCESSING': ["Understood, now you'd want to watch...", "Roger that, now would you rather watch a movie or start watching some cool series?"],
+	'GENRE_PROCESSING': ['Ok then, here is maybe the most difficult part... choose a genre:', 'Well-well, what about a genre?']
+}
