@@ -25,13 +25,7 @@ async def process_mood(call: types.CallbackQuery):
 	'edit_message_reply_markup()' removes the keyboard user already used
 	"""
 
-	await bot.edit_message_reply_markup(chat_id=call.from_user.id, message_id=call.message.message_id, 
-		reply_markup=InlineKeyboardMarkup(
-			inline_keyboard=[
-				[InlineKeyboardButton(text=call.data, callback_data='test')]
-			]
-		)
-	)
+	await replace_inlinekeyboard(call.from_user.id, call.message.message_id, call.data)
 
 	if config.PROCESS_FLAGS['mood_selected'] == False:
 		config.USER_MOOD = UserMood(call.data)
@@ -43,13 +37,7 @@ async def process_mood(call: types.CallbackQuery):
 async def process_show(call: types.CallbackQuery):
 	"""Processing user's show selection"""
 
-	await bot.edit_message_reply_markup(chat_id=call.from_user.id, message_id=call.message.message_id, 
-		reply_markup=InlineKeyboardMarkup(
-			inline_keyboard=[
-				[InlineKeyboardButton(text=call.data, callback_data='test')]
-			]
-		)
-	)
+	await replace_inlinekeyboard(call.from_user.id, call.message.message_id, call.data)
 
 	if config.PROCESS_FLAGS['show_selected'] == False:
 		config.USER_SHOW = Show(call.data)
@@ -61,16 +49,21 @@ async def process_show(call: types.CallbackQuery):
 async def process_genre(call: types.CallbackQuery):
 	"""Processing user's genre selection"""
 
-	await bot.edit_message_reply_markup(chat_id=call.from_user.id, message_id=call.message.message_id, 
-		reply_markup=InlineKeyboardMarkup(
-			inline_keyboard=[
-				[InlineKeyboardButton(text=call.data, callback_data='test')]
-			]
-		)
-	)
+	await replace_inlinekeyboard(call.from_user.id, call.message.message_id, call.data)
 
 	if config.PROCESS_FLAGS['genre_selected'] == False:
 		config.USER_GENRE = Genre(call.data)
 		config.PROCESS_FLAGS['genre_selected'] = True
 
 		await call.message.answer(f"{config.USER_MOOD}\n{config.USER_SHOW}\n{config.USER_GENRE}")
+
+
+async def replace_inlinekeyboard(chat_id_var, message_id_var, call_data_var):
+	"""Replaces inline-keyboard with variants for user with his selecion"""
+	await bot.edit_message_reply_markup(chat_id=chat_id_var, message_id=message_id_var, 
+		reply_markup=InlineKeyboardMarkup(
+			inline_keyboard=[
+				[InlineKeyboardButton(text=call_data_var, callback_data='test')]
+			]
+		)
+	)
