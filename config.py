@@ -26,12 +26,27 @@ PROCESS_FLAGS = {
 	'genre_selected': False
 }
 
+class SummaryConfirmation(Enum):
+	"""
+	Variants of confirmations when we check the information user selected
+
+	using as 'callback_data' in 'keyboards.py', for 'text' in 'callbacks.py' 
+	and as a value for 'USER_MOOD'
+	"""
+	YES_SUMMARY = 'yes'
+	NO_SUMMARY = 'no'
+
+	@classmethod
+	def list(cls):
+		"""Get a list of values"""
+		return list(map(lambda c: c.value, cls))
+
 
 class UserMood(Enum):
 	"""
 	User's mood variants
 	
-	using as 'callback_data' in 'keyboards.py', for 'text' in 'callback.py' 
+	using as 'callback_data' in 'keyboards.py', for 'text' in 'callbacks.py' 
 	and as a value for 'USER_MOOD'
 	"""
 	DEPRESSION = 'depression'
@@ -52,7 +67,12 @@ class UserMood(Enum):
 
 
 class Genre(Enum):
-	"""Available genres of movies/series which we have in DB"""
+	"""
+	Available genres of movies/series which we have in DB
+	
+	using as 'callback_data' in 'keyboards.py', for 'text' in 'callbacks.py' 
+	and as a value for 'USER_MOOD'
+	"""
 	COMEDY = 'comedy'
 	THRILLER = 'thriller'
 	ACTION = 'action'
@@ -128,6 +148,13 @@ class CustomInlineKeyboardButton(Enum):
 	FANTASY_BTN = '🔮Fantasy'
 	ANIMATION_BTN = '🧸Animation'
 
+	"""
+	Confirmation btns when user already selected all the categories
+	in 'Smart Selection' (mood, movie/series, genre)
+	""" 
+	SMART_SELECTION_YES_BTN = '✔️Yes'
+	SMART_SELECTION_NO_BTN = '✖️No'
+
 
 """
 Sticker paths
@@ -139,7 +166,11 @@ SMART_SELECTION_STI = 'static/smart_selection.webp'
 
 """
 Dictionaries with several variants of replying messages
-only welcome message in 'personal_actions.py' is hard-coded due to getting bot/user names
+
+Hard-coded bot messages: 
+- 'personal_actions.py': welcome message in 'send_welcome' due to getting bot/user names
+- 'callbacks.py': verification message in 'process_genre' due to getting user's selections
+from 'Smart Selection'
 """
 
 REPLY_KEYBOARD_MESSAGES = {
@@ -149,5 +180,6 @@ REPLY_KEYBOARD_MESSAGES = {
 CALLBACK_MESSAGES = {
 	'MOOD_SELECTION': ['Great, let me know your spirit condition', 'Share your mood with me'],
 	'SHOW_PROCESSING': ["Understood, now you'd want to watch...", "Roger that, now would you rather watch a movie or start watching some cool series?"],
-	'GENRE_PROCESSING': ['Ok then, here is maybe the most difficult part... choose a genre:', 'Well-well, what about a genre?']
+	'GENRE_PROCESSING': ['Ok then, here is maybe the most difficult part... choose a genre:', 'Well-well, what about a genre?'],
+	'SMART_SELECTION_VERIFYING': ["Great, let's find something for you!", 'Brilliant, give me a minute to find something...']
 }
