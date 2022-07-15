@@ -18,6 +18,15 @@ USER_MOOD = None
 USER_SHOW = None
 USER_GENRE = None
 
+# represent the process of each reply-keyboard btn
+IS_SMART_SELECTION = False
+IS_WE_RECOMMEND = False
+IS_NO_PREFERENCES = False
+IS_SEND_FEEDBACK = False
+
+# 'back' inline-keyboard btn
+BACK_BTN = '⬅Back'
+BACK_BTN_CALLBACK_DATA = 'back'
 
 # used in 'callbacks.py' for verification
 PROCESS_FLAGS = {
@@ -182,4 +191,12 @@ CALLBACK_MESSAGES = {
 	'SHOW_PROCESSING': ["Understood, now you'd want to watch...", "Roger that, now would you rather watch a movie or start watching some cool series?"],
 	'GENRE_PROCESSING': ['Ok then, here is maybe the most difficult part... choose a genre:', 'Well-well, what about a genre?'],
 	'SMART_SELECTION_VERIFYING': ["Great, let's find something for you!", 'Brilliant, give me a minute to find something...']
+}
+
+SMART_SELECTION_BACK_MESSAGES = {
+	'ON_MOOD_SELECTION_BACK': ['Want to try some other category?', 'Hey, I got three more options!'],
+	'ON_SHOW_SELECTION_BACK': ['Your mood changes so quickly...', 'Want to change the mood?'],
+	'ON_GENRE_SELECTION_BACK': ['Changed your mind?', 'Getting back...'],
+	'ON_SUMMARY_SELECTION_BACK': ['Changed your mind about the genre?', "I wouldn't watch that genre now too, actually..."],
+	'ON_SUMMING_UP_SELECTION_BACK': ["Okay, let's try that again", "Go ahead and try again"]
 }
