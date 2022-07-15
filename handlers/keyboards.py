@@ -4,6 +4,7 @@ Contains functions for creating keyboards
 """
 
 from config import (
+	SummaryConfirmation,
 	UserMood, 
 	Genre, 
 	Show, 
@@ -21,7 +22,7 @@ from aiogram.types import (
 class KeyboardHandler():
 
 	def get_main_replykeyboard():
-		"""Sets up the main basic replykeyboard"""
+		"""Sets up the main basic reply-keyboard"""
 		return ReplyKeyboardMarkup(
 			keyboard=[
 				[
@@ -38,7 +39,7 @@ class KeyboardHandler():
 		)
 
 	def get_mood_inlinekeyboard():
-		"""Sets up inlinekeyboard for user's mood selection"""
+		"""Sets up inline-keyboard for user's mood selection"""
 		return InlineKeyboardMarkup(
 			inline_keyboard=[
 				[
@@ -63,7 +64,7 @@ class KeyboardHandler():
 		)
 
 	def get_show_inlinekeyboard():
-		"""Sets up inlinekeyboard for user's show selection"""
+		"""Sets up inline-keyboard for user's show selection"""
 		return InlineKeyboardMarkup(
 			inline_keyboard=[
 				[
@@ -74,7 +75,7 @@ class KeyboardHandler():
 		)
 
 	def get_genre_inlinekeyboard():
-		"""Sets up inlinekeyboard for user's genre selection"""
+		"""Sets up inline-keyboard for user's genre selection"""
 		return InlineKeyboardMarkup(
 			inline_keyboard=[
 				[
@@ -90,6 +91,19 @@ class KeyboardHandler():
 				[
 					InlineKeyboardButton(text=CustomInlineKeyboardButton.FANTASY_BTN.value, callback_data=Genre.FANTASY.value),
 					InlineKeyboardButton(text=CustomInlineKeyboardButton.ANIMATION_BTN.value, callback_data=Genre.ANIMATION.value)
+				]
+			]
+		)
+
+	def get_smart_selection_summary_inlinekeyboard():
+		"""Sets up inline-keyboard for verification user's selections 
+		from 'Smart Selection'
+		"""
+		return InlineKeyboardMarkup(
+			inline_keyboard=[
+				[
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.SMART_SELECTION_YES_BTN.value, callback_data=SummaryConfirmation.YES_SUMMARY.value), 
+					InlineKeyboardButton(text=CustomInlineKeyboardButton.SMART_SELECTION_NO_BTN.value, callback_data=SummaryConfirmation.NO_SUMMARY.value)
 				]
 			]
 		)

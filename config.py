@@ -11,20 +11,42 @@ from enum import Enum
 load_dotenv()
 TOKEN = os.getenv('BOT_TOKEN')
 
+
 # user's selected mood, show type(movie/series) and genre
 # the variables are set in 'callbacks.py' and never changed
 USER_MOOD = None
 USER_SHOW = None
 USER_GENRE = None
 
+
 # used in 'callbacks.py' for verification
-PROCESS_FLAGS = {'mood_selected': False, 'show_selected': False, 'genre_selected': False}
+PROCESS_FLAGS = {
+	'mood_selected': False, 
+	'show_selected': False, 
+	'genre_selected': False
+}
+
+class SummaryConfirmation(Enum):
+	"""
+	Variants of confirmations when we check the information user selected
+
+	using as 'callback_data' in 'keyboards.py', for 'text' in 'callbacks.py' 
+	and as a value for 'USER_MOOD'
+	"""
+	YES_SUMMARY = 'yes'
+	NO_SUMMARY = 'no'
+
+	@classmethod
+	def list(cls):
+		"""Get a list of values"""
+		return list(map(lambda c: c.value, cls))
+
 
 class UserMood(Enum):
 	"""
 	User's mood variants
 	
-	using as 'callback_data' in 'keyboards.py', for 'text' in 'callback.py' 
+	using as 'callback_data' in 'keyboards.py', for 'text' in 'callbacks.py' 
 	and as a value for 'USER_MOOD'
 	"""
 	DEPRESSION = 'depression'
@@ -43,8 +65,14 @@ class UserMood(Enum):
 		"""Get a list of values"""
 		return list(map(lambda c: c.value, cls))
 
+
 class Genre(Enum):
-	"""Available genres of movies/series which we have in DB"""
+	"""
+	Available genres of movies/series which we have in DB
+	
+	using as 'callback_data' in 'keyboards.py', for 'text' in 'callbacks.py' 
+	and as a value for 'USER_MOOD'
+	"""
 	COMEDY = 'comedy'
 	THRILLER = 'thriller'
 	ACTION = 'action'
@@ -58,6 +86,7 @@ class Genre(Enum):
 	def list(cls):
 		"""Get a list of values"""
 		return list(map(lambda c: c.value, cls))
+
 
 class Show(Enum):
 	"""
@@ -74,6 +103,7 @@ class Show(Enum):
 		"""Get a list of values"""
 		return list(map(lambda c: c.value, cls))
 
+
 class Novelty(Enum):
 	"""
 	Films before 2010 included are considered as old (upper bound)
@@ -82,12 +112,14 @@ class Novelty(Enum):
 	OLD = 2010
 	MODERN = 2011
 
+
 class CustomReplyKeyboardButton(Enum):
 	"""Button texts for ReplyKeyboard"""
 	SMART_SELECTION_BTN = '🎬Smart Selection'
 	WE_RECOMMEND_BTN = '🎯We recommend'
 	NO_PREFERENCES_BTN = '👀No preferences'
 	SEND_FEEDBACK_BTN = '🎭Send feedback'
+
 
 class CustomInlineKeyboardButton(Enum):
 	"""Button texts for InlineKeyboard to process user's mood selection"""
@@ -115,3 +147,39 @@ class CustomInlineKeyboardButton(Enum):
 	SPORT_BTN = '🚴‍♀️Sport'
 	FANTASY_BTN = '🔮Fantasy'
 	ANIMATION_BTN = '🧸Animation'
+
+	"""
+	Confirmation btns when user already selected all the categories
+	in 'Smart Selection' (mood, movie/series, genre)
+	""" 
+	SMART_SELECTION_YES_BTN = '✔️Yes'
+	SMART_SELECTION_NO_BTN = '✖️No'
+
+
+"""
+Sticker paths
+"""
+
+WELCOME_STI = 'static/welcome.webp'
+SMART_SELECTION_STI = 'static/smart_selection.webp'
+
+
+"""
+Dictionaries with several variants of replying messages
+
+Hard-coded bot messages: 
+- 'personal_actions.py': welcome message in 'send_welcome' due to getting bot/user names
+- 'callbacks.py': verification message in 'process_genre' due to getting user's selections
+from 'Smart Selection'
+"""
+
+REPLY_KEYBOARD_MESSAGES = {
+	'SMART_SELECTION': ["It's movie time! 3.. 2.. 1..", "Time to eat some popcorn then..."]
+}
+
+CALLBACK_MESSAGES = {
+	'MOOD_SELECTION': ['Great, let me know your spirit condition', 'Share your mood with me'],
+	'SHOW_PROCESSING': ["Understood, now you'd want to watch...", "Roger that, now would you rather watch a movie or start watching some cool series?"],
+	'GENRE_PROCESSING': ['Ok then, here is maybe the most difficult part... choose a genre:', 'Well-well, what about a genre?'],
+	'SMART_SELECTION_VERIFYING': ["Great, let's find something for you!", 'Brilliant, give me a minute to find something...']
+}
