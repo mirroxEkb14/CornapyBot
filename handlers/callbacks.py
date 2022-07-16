@@ -153,6 +153,7 @@ async def process_back(call: types.CallbackQuery):
 
 def reset_smart_selection_constants():
 	"""After user confirms he selected all the categories right"""
+	
 	config.USER_MOOD = None
 	config.USER_SHOW = None
 	config.USER_GENRE = None

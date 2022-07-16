@@ -134,14 +134,14 @@ class CustomInlineKeyboardButton(Enum):
 	"""Button texts for InlineKeyboard to process user's mood selection"""
 	DEPRESSION_BTN = '🌧Depressed'
 	CHEERFUL_BTN = '💃Сheerful'
-	DONT_KNOW_BTN = "🎲Don't know"
-	LOT_ON_MY_MIND_BTN = '🕳Many thoughts'
-	STRESSED_OUT_BTN = '💣Stressed out'
-	NO_STRENGTH_AT_ALL_BTN = '😮‍💨No energy'
 	FIGHTING_SPIRIT_BTN = '😼Fighting mood'
 	FAMILY_WEEKEND_BTN = '👨‍👩‍👧‍👦Family'
 	GROUP_OF_FRIENDS_BTN = '🍻Friends'
 	LOVE_BTN = '💋Love'
+	DONT_KNOW_BTN = "🎲Don't know"
+	LOT_ON_MY_MIND_BTN = '🕳Many thoughts'
+	STRESSED_OUT_BTN = '💣Stressed out'
+	NO_STRENGTH_AT_ALL_BTN = '😮‍💨No energy'
 
 	"""Button texts for InlineKeyboard to process user's show selection"""
 	MOVIE_BTN = '🎬Movie'
@@ -182,8 +182,11 @@ Hard-coded bot messages:
 from 'Smart Selection'
 """
 
+WELCOME_MESSAGES = ["Welcome {user_name}!\nI'm - <b>{bot_name}</b>, created to be your own movie-guide\nLet's pick some movie",
+"Howdy {user_name}!\nMy name's <b>{bot_name}</b>, an avid lover of movies\nLet me find you some good movie"]
+
 REPLY_KEYBOARD_MESSAGES = {
-	'SMART_SELECTION': ["It's movie time! 3.. 2.. 1..", "Time to eat some popcorn then..."]
+	'SMART_SELECTION': ["It's a movie time! 3.. 2.. 1..", "Time to eat some popcorn then..."]
 }
 
 CALLBACK_MESSAGES = {

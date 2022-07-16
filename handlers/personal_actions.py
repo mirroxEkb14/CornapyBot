@@ -26,7 +26,8 @@ async def send_welcome(message: types.Message):
 	await bot.send_sticker(chat_id=message.chat.id, sticker=wlcm_sti)
 
 	me = await bot.get_me()
-	await message.answer(f"Welcome {message.from_user.first_name}!\nI'm - <b>{me.first_name}</b>, created to be your own movie-guide\nLet's pick some movie", 
+	welcome_messages = config.WELCOME_MESSAGES
+	await message.answer(welcome_messages[randint(0, len(welcome_messages) - 1)].format(user_name=message.from_user.first_name, bot_name=me.first_name), 
 		parse_mode='html', reply_markup=keyboards.MAIN_REPLY_KEYBOARD)
 
 # filter user messages
