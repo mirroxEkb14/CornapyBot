@@ -1,0 +1,15 @@
+2022-07-17 17:31:09,482 - handlers.callbacks - INFO - 'Smart Selection': mood processing
+2022-07-17 17:31:22,625 - handlers.callbacks - INFO - 'Smart Selection': show processing
+2022-07-17 17:31:25,916 - handlers.callbacks - INFO - 'Smart Selection': genre processing
+2022-07-17 17:31:30,207 - handlers.callbacks - INFO - 'Smart Selection': 'no_summary' processing
+2022-07-17 17:31:40,235 - handlers.callbacks - INFO - 'Smart Selection': mood processing
+2022-07-17 17:31:43,360 - handlers.callbacks - INFO - 'Smart Selection': going back from 'show' to the 'mood'
+2022-07-17 17:31:47,500 - handlers.callbacks - INFO - 'Smart Selection': going back from 'mood' to the 'main_keyboard'
+2022-07-17 17:32:03,119 - handlers.callbacks - INFO - 'Smart Selection': mood processing
+2022-07-17 17:32:05,622 - handlers.callbacks - INFO - 'Smart Selection': show processing
+2022-07-17 17:32:07,802 - handlers.callbacks - INFO - 'Smart Selection': going back from 'genre' to the 'show'
+2022-07-17 17:32:12,344 - handlers.callbacks - INFO - 'Smart Selection': show processing
+2022-07-17 17:32:17,688 - handlers.callbacks - INFO - 'Smart Selection': genre processing
+2022-07-17 17:32:22,411 - handlers.callbacks - INFO - 'Smart Selection': going back from 'summing_up' to the 'genre'
+2022-07-17 17:32:25,602 - handlers.callbacks - INFO - 'Smart Selection': genre processing
+2022-07-17 17:32:28,160 - handlers.callbacks - INFO - 'Smart Selection': 'yes_summary' processing

@@ -15,12 +15,18 @@ from config import (
 	REPLY_KEYBOARD_MESSAGES,
 	CALLBACK_MESSAGES
 )
+import logger
 import config
+
+# define a logger for this file
+log = logger.get_logger(logger_name=__name__, file_name = 'logger/personal_actions_info.log')
 
 # register the '/start' command
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
 	"""Send a sticker and message with replykeyboard"""
+
+	log.info("Executing 'send_welcome' function")
 
 	wlcm_sti = open(WELCOME_STI, 'rb')
 	await bot.send_sticker(chat_id=message.chat.id, sticker=wlcm_sti)
@@ -37,6 +43,8 @@ async def filter_messages(message: types.Message):
 
 	if message.text == CustomReplyKeyboardButton.SMART_SELECTION_BTN.value and config.IS_SMART_SELECTION == False:
 		""" 'Smart Selection' case  """
+
+		log.info("Processing 'Smart Selection'")
 
 		config.IS_SMART_SELECTION = True
 
@@ -56,3 +64,14 @@ async def filter_messages(message: types.Message):
 	else:
 		"""Process user's messages that don't contain commands or btn texts"""
 		await message.reply("Don't know how to process something like this...")
+
+
+# creates a menu
+async def set_default_commands(dp):
+	"""Sets default commands user will have when interacting with the bot"""
+	await dp.bot.set_my_commands(
+		[
+			types.BotCommand('start', 'Launch bot'),
+			types.BotCommand('help', 'Display help')
+		]
+	)
