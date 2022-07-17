@@ -17,8 +17,11 @@ from config import (
 	CALLBACK_MESSAGES,
 	SMART_SELECTION_BACK_MESSAGES
 )
+import logger
 import config
 import asyncio
+
+log = logger.get_logger(logger_name=__name__, file_name = 'logger/callbacks_info.log')
 
 @dp.callback_query_handler(text=UserMood.list())
 async def process_mood(call: types.CallbackQuery):
@@ -29,6 +32,9 @@ async def process_mood(call: types.CallbackQuery):
 	"""
 
 	if config.PROCESS_FLAGS['mood_selected'] == False:
+
+		log.info("'Smart Selection': mood processing")
+
 		config.USER_MOOD = UserMood(call.data)
 		config.PROCESS_FLAGS['mood_selected'] = True
 
@@ -40,6 +46,9 @@ async def process_show(call: types.CallbackQuery):
 	"""Processing user's show selection"""
 
 	if config.PROCESS_FLAGS['show_selected'] == False:
+
+		log.info("'Smart Selection': show processing")
+
 		config.USER_SHOW = Show(call.data)
 		config.PROCESS_FLAGS['show_selected'] = True
 
@@ -51,6 +60,9 @@ async def process_genre(call: types.CallbackQuery):
 	"""Processing user's genre selection"""
 
 	if config.PROCESS_FLAGS['genre_selected'] == False:
+
+		log.info("'Smart Selection': genre processing")
+
 		config.USER_GENRE = Genre(call.data)
 		config.PROCESS_FLAGS['genre_selected'] = True
 
@@ -68,6 +80,8 @@ async def verify_smart_selection(call: types.CallbackQuery):
 	if call.data == SummaryConfirmation.YES_SUMMARY.value:
 		"""If user agrees that all his selections are correct"""
 
+		log.info("'Smart Selection': 'yes_summary' processing")
+
 		await bot.edit_message_reply_markup(chat_id=call.from_user.id, 
 			message_id=call.message.message_id, reply_markup=None)
 
@@ -78,6 +92,8 @@ async def verify_smart_selection(call: types.CallbackQuery):
 
 	elif call.data == SummaryConfirmation.NO_SUMMARY.value:
 		"""Get user in the beggining - mood selection"""
+
+		log.info("'Smart Selection': 'no_summary' processing")
 
 		config.PROCESS_FLAGS['mood_selected'] = False
 		config.PROCESS_FLAGS['show_selected'] = False
@@ -109,6 +125,8 @@ async def process_back(call: types.CallbackQuery):
 	if config.PROCESS_FLAGS['mood_selected'] == False:
 		"""Means user on the step of selecting mood and want to return to the main menu"""
 
+		log.info("'Smart Selection': going back from 'mood' to the 'main_keyboard'")
+
 		config.IS_SMART_SELECTION = False
 
 		await bot.edit_message_reply_markup(chat_id=call.from_user.id, 
@@ -121,6 +139,8 @@ async def process_back(call: types.CallbackQuery):
 	elif config.PROCESS_FLAGS['show_selected'] == False:
 		"""Means user on the step of selecting show and wants to change his mood"""
 
+		log.info("'Smart Selection': going back from 'show' to the 'mood'")
+
 		config.PROCESS_FLAGS['mood_selected'] = False
 
 		smart_selection_show_back_message = SMART_SELECTION_BACK_MESSAGES['ON_SHOW_SELECTION_BACK']
@@ -130,6 +150,8 @@ async def process_back(call: types.CallbackQuery):
 
 	elif config.PROCESS_FLAGS['genre_selected'] == False:
 		"""Means user on the step of selecting genre and wants to change his show"""
+
+		log.info("'Smart Selection': going back from 'genre' to the 'show'")
 
 		config.PROCESS_FLAGS['show_selected'] = False
 
@@ -143,6 +165,8 @@ async def process_back(call: types.CallbackQuery):
 		config.PROCESS_FLAGS['genre_selected'] == True:
 		"""Means user on the step of summing up and wants to change his genre"""
 
+		log.info("'Smart Selection': going back from 'summing_up' to the 'genre'")
+
 		config.PROCESS_FLAGS['genre_selected'] = False
 
 		smart_selection_summary_back_message = SMART_SELECTION_BACK_MESSAGES['ON_SUMMARY_SELECTION_BACK']
@@ -153,7 +177,6 @@ async def process_back(call: types.CallbackQuery):
 
 def reset_smart_selection_constants():
 	"""After user confirms he selected all the categories right"""
-	
 	config.USER_MOOD = None
 	config.USER_SHOW = None
 	config.USER_GENRE = None
