@@ -21,6 +21,7 @@ import logger
 import config
 import asyncio
 
+# define a logger for this file
 log = logger.get_logger(logger_name=__name__, file_name = 'logger/callbacks_info.log')
 
 @dp.callback_query_handler(text=UserMood.list())

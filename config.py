@@ -166,11 +166,11 @@ class CustomInlineKeyboardButton(Enum):
 
 
 """
-Sticker paths
+Sticker paths	
 """
 
-WELCOME_STI = 'static/welcome.webp'
-SMART_SELECTION_STI = 'static/smart_selection.webp'
+WELCOME_STI = 'static/welcome_img.webp'
+SMART_SELECTION_STI = 'static/smart_selection_img.webp'
 
 
 """
